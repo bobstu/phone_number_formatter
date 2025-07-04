@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 300px;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      margin: 0;
+      background: #f8f9fa;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .header h1 {
+      font-size: 18px;
+      color: #333;
+      margin: 0 0 8px 0;
+    }
+    
+    .header p {
+      font-size: 14px;
+      color: #666;
+      margin: 0;
+    }
+    
+    .format-btn {
+      width: 100%;
+      padding: 12px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-bottom: 15px;
+    }
+    
+    .format-btn:hover {
+      background: #45a049;
+    }
+    
+    .format-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    
+    .examples {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      margin-bottom: 15px;
+    }
+    
+    .examples h3 {
+      margin: 0 0 10px 0;
+      font-size: 14px;
+      color: #333;
+    }
+    
+    .example {
+      margin: 8px 0;
+      font-size: 13px;
+      color: #555;
+    }
+    
+    .example .input {
+      font-family: monospace;
+      background: #f0f0f0;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+    
+    .example .arrow {
+      margin: 0 8px;
+      color: #999;
+    }
+    
+    .example .output {
+      font-family: monospace;
+      background: #e8f5e8;
+      padding: 2px 4px;
+      border-radius: 3px;
+      color: #2e7d32;
+    }
+    
+    .instructions {
+      background: #e3f2fd;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #1565c0;
+      line-height: 1.4;
+    }
+    
+    .shortcut {
+      font-family: monospace;
+      background: rgba(255,255,255,0.8);
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📞 Phone Number Formatter</h1>
+    <p>Format selected text as phone numbers</p>
+  </div>
+  
+  <button id="formatBtn" class="format-btn">Format Selection</button>
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    <div class="example">
+      <span class="input">1234567890</span>
+      <span class="arrow">→</span>
+      <span class="output">123-456-7890</span>
+    </div>
+    <div class="example">
+      <span class="input">11234567890</span>
+      <span class="arrow">→</span>
+      <span class="output">+1 123-456-7890</span>
+    </div>
+    <div class="example">
+      <span class="input">441234567890</span>
+      <span class="arrow">→</span>
+      <span class="output">+44 1234 567 890</span>
+    </div>
+    <div class="example">
+      <span class="input">8612345678901</span>
+      <span class="arrow">→</span>
+      <span class="output">+86 123 4567 8901</span>
+    </div>
+    <div class="example">
+      <span class="input">+33 1 23 45 67 89</span>
+      <span class="arrow">→</span>
+      <span class="output">+33 1 23 45 67 89</span>
+    </div>
+  </div>
+  
+  <div class="instructions">
+    <strong>How to use:</strong><br>
+    1. Select text containing numbers<br>
+    2. Right-click and choose "Format as Phone Number"<br>
+    3. Or use keyboard shortcut: <span class="shortcut">Ctrl+Shift+P</span><br><br>
+    <strong>Supported formats:</strong> US, Canada, UK, Germany, France, Japan, Australia, China, India, Brazil, Mexico, and more!
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

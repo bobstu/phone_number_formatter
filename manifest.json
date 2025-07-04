@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Phone Number Formatter",
+  "version": "1.0.0",
+  "description": "Format selected text as a phone number (xxx-xxx-xxxx)",
+  "permissions": [
+    "activeTab",
+    "contextMenus"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Phone Number Formatter"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
