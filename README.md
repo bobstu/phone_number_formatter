@@ -1,11 +1,11 @@
 # Phone Number Formatter Chrome Extension
 
-A Chrome extension that formats selected text as phone numbers in the xxx-xxx-xxxx format, inspired by the "Change Case" extension.
+A Chrome extension that formats selected text as phone numbers in an easier to read format, inspired by the "Change Case" extension.
 
 ## Features
 
 - **Context Menu Integration**: Right-click on selected text and choose "Format as Phone Number"
-- **Keyboard Shortcut**: Use `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac) to format selected text
+- **Keyboard Shortcut**: Use `Ctrl+2` (or `Cmd+2` on Mac) to format selected text
 - **International Phone Number Support**: Recognizes and formats phone numbers from multiple countries
 - **Supported Countries**: 
   - 🇺🇸 United States (+1) → `+1 123-456-7890`
@@ -26,11 +26,11 @@ A Chrome extension that formats selected text as phone numbers in the xxx-xxx-xx
 
 ## Installation
 
-### Method 1: Load as Unpacked Extension (Developer Mode)
+### Load as Unpacked Extension (Developer Mode)
 
 1. **Download the extension files**:
    - Save all the provided files in a folder on your computer
-   - Create an `icons` folder and add icon files (or use placeholder icons)
+   - If you downloaded them as a zip file, extract them. 
 
 2. **Open Chrome Extensions**:
    - Go to `chrome://extensions/`
@@ -40,13 +40,6 @@ A Chrome extension that formats selected text as phone numbers in the xxx-xxx-xx
    - Click "Load unpacked"
    - Select the folder containing your extension files
    - The extension should now appear in your extensions list
-
-### Method 2: Create Icons (Optional)
-
-Create simple icon files or use online icon generators:
-- `icons/icon16.png` (16x16 pixels)
-- `icons/icon48.png` (48x48 pixels)  
-- `icons/icon128.png` (128x128 pixels)
 
 ## Usage
 
@@ -58,7 +51,7 @@ Create simple icon files or use online icon generators:
 
 ### Method 2: Keyboard Shortcut
 1. Select text containing numbers
-2. Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (Mac)
+2. Press `Ctrl+2` (Windows/Linux) or `Cmd+2` (Mac)
 3. The selected text will be formatted automatically
 
 ### Method 3: Extension Popup
