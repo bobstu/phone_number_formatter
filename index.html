@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Number Formatter - Chrome Extension</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            padding: 40px 0;
+        }
+
+        .header .icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background-image: url('logo.png');
+            background-size: 80px 80px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 60px 40px;
+            align-items: center;
+        }
+
+        .hero-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: #4285f4;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
+            margin-right: 15px;
+            margin-bottom: 10px;
+        }
+
+        .download-btn:hover {
+            background: #3367d6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(66, 133, 244, 0.4);
+        }
+
+        .download-btn.secondary {
+            background: #28a745;
+        }
+
+        .download-btn.secondary:hover {
+            background: #218838;
+        }
+
+        .demo-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+        }
+
+        .demo-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .example {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .example-input {
+            font-family: monospace;
+            color: #666;
+            background: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            min-width: 140px;
+        }
+
+        .arrow {
+            color: #4285f4;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .example-output {
+            font-family: monospace;
+            color: #4285f4;
+            font-weight: 600;
+            background: #e8f0fe;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #dadce0;
+        }
+
+        .country-flag {
+            font-size: 0.9em;
+            margin-left: 10px;
+            opacity: 0.8;
+        }
+
+        .features-section {
+            padding: 60px 40px;
+            background: #f8f9fa;
+        }
+
+        .features-section h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .feature-list {
+            list-style: none;
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .feature-list li {
+            color: #666;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4285f4;
+            font-weight: bold;
+        }
+
+        .keyboard-shortcut {
+            display: inline-block;
+            background: #2c3e50;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .privacy-section {
+            background: white;
+            padding: 60px 40px;
+        }
+
+        .privacy-section h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .privacy-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+        }
+
+        .privacy-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #4285f4;
+        }
+
+        .privacy-content p {
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .privacy-highlight {
+            background: #e8f0fe;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4285f4;
+            margin: 20px 0;
+        }
+
+        .privacy-highlight p {
+            margin: 0;
+            font-weight: 600;
+            color: #1a73e8;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+            opacity: 0.8;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 40px 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text h2 {
+                font-size: 2rem;
+            }
+
+            .features-section,
+            .privacy-section {
+                padding: 40px 20px;
+            }
+
+            .privacy-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="icon">
+                <img src="data:image/png;base64,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" alt="Blue Rotary Phone" style="width: 100%; height: 100%; object-fit: contain;"/>
+            </div>
+            <h1>Phone Number Formatter</h1>
+            <p class="subtitle">Chrome Extension for International Phone Number Formatting</p>
+            <div class="version-badge">v2.0.1 - Latest Version</div>
+        </div>
+
+        <div class="main-content">
+            <div class="hero-section">
+                <div class="hero-text">
+                    <h2>Format Phone Numbers Instantly</h2>
+                    <p>Select any phone number on any website and instantly format it with our Chrome extension. Supports 10+ countries with intelligent detection and works perfectly with business applications like Bullhorn.</p>
+                </div>
+                
+                <div class="demo-section">
+                    <h3>See it in action:</h3>
+                    <div class="example">
+                        <span class="example-input">1234567890</span>
+                        <span class="arrow">→</span>
+                        <span class="example-output">123-456-7890</span>
+                        <span class="country-flag">🇺🇸 US</span>
+                    </div>
+                    <div class="example">
+                        <span class="example-input">441234567890</span>
+                        <span class="arrow">→</span>
+                        <span class="example-output">+44 1234 567 890</span>
+                        <span class="country-flag">🇬🇧 UK</span>
+                    </div>
+                    <div class="example">
+                        <span class="example-input">521234567890</span>
+                        <span class="arrow">→</span>
+                        <span class="example-output">+52 123 456 7890</span>
+                        <span class="country-flag">🇲🇽 Mexico</span>
+                    </div>
+                    <div class="example">
+                        <span class="example-input">(123) 456-7890</span>
+                        <span class="arrow">→</span>
+                        <span class="example-output">123-456-7890</span>
+                        <span class="country-flag">🔄 Cleanup</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="features-section">
+                <h2>Why Choose Our Extension?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Multiple Access Methods</h3>
+                        <p>Use the extension your way with multiple convenient options:</p>
+                        <ul class="feature-list">
+                            <li>Right-click context menu</li>
+                            <li>Keyboard shortcut: <span class="keyboard-shortcut">Ctrl+2</span></li>
+                            <li>Extension popup button</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3>International Support</h3>
+                        <p>Intelligent detection and formatting for 10+ countries:</p>
+                        <ul class="feature-list">
+                            <li>US & Canada (+1)</li>
+                            <li>UK, Germany, France</li>
+                            <li>Japan, Australia, China</li>
+                            <li>India, Brazil, Mexico</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💼</div>
+                        <h3>Business App Ready</h3>
+                        <p>Enhanced compatibility with professional applications:</p>
+                        <ul class="feature-list">
+                            <li>Bullhorn Staffing compatible</li>
+                            <li>CRM system friendly</li>
+                            <li>Dynamic content support</li>
+                            <li>Content security compliant</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>100% Private</h3>
+                        <p>Your privacy and security are our top priorities:</p>
+                        <ul class="feature-list">
+                            <li>No data collection</li>
+                            <li>No tracking or analytics</li>
+                            <li>Processes locally only</li>
+                            <li>Minimal permissions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="privacy-section">
+                <h2>Privacy Policy</h2>
+                <div class="privacy-content">
+                    <div class="privacy-highlight">
+                        <p>🔒 This extension does NOT collect any personal information or data.</p>
+                    </div>
+                    
+                    <h3>Data Collection</h3>
+                    <p>The Phone Number Formatter Chrome Extension operates entirely locally on your device. We do not collect, store, or transmit any personal information, browsing data, or phone numbers that you format using this extension.</p>
+                    
+                    <h3>Permissions</h3>
+                    <p>This extension requires minimal permissions to function:</p>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li>Access to the active tab for text selection and formatting</li>
+                        <li>Context menu permissions for right-click functionality</li>
+                        <li>No network permissions required</li>
+                        <li>No storage permissions required</li>
+                    </ul>
+                    
+                    <h3>How It Works</h3>
+                    <p>When you select text and use the formatting shortcut, the extension processes the selected text locally on your device. No data leaves your browser or device at any time. All phone number formatting happens entirely within your browser.</p>
+                    
+                    <h3>Third-Party Services</h3>
+                    <p>This extension does not use any third-party services, analytics, or tracking tools. It operates completely offline and independently without making any network requests.</p>
+                    
+                    <h3>Business Application Compatibility</h3>
+                    <p>When used with business applications like Bullhorn, the extension enhances its compatibility but still maintains the same privacy standards. No data from business applications is accessed, stored, or transmitted.</p>
+                    
+                    <h3>Updates to Privacy Policy</h3>
+                    <p>Any changes to this privacy policy will be reflected in extension updates. We will never change our commitment to not collecting user data.</p>
+                    
+                    <h3>Contact</h3>
+                    <p>If you have any questions about this privacy policy or the extension, please contact us through the Chrome Web Store support page.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Phone Number Formatter. All rights reserved.</p>
+        <p>
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#support">Support</a>
+            <a href="#contact">Contact</a>
+        </p>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.feature-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
